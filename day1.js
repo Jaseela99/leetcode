@@ -62,3 +62,23 @@ console.log(twoSum(nums,target))
 
 //----------------------------------------------------
 
+/* Given an integer x, return true if x is palindrome integer.
+An integer is a palindrome when it reads the same backward as forward.
+For example, 121 is a palindrome while 123 is not.
+ */
+let x=12321
+var isPalindrome = function(x) {
+  /*  let y=  x.toString().split('').reverse().join('')* Math.sign(x)
+    y === x ? console.log("true") : console.log("false") */
+    
+
+    /* let y = x.toString()
+    for (let i=0;i < y.length/2;i++ ){
+        let temp =y.charAt(i)
+        y.charAt(i)=y.charAt(length-i-1)
+        y.charAt(length-i-1) = temp
+    }
+    parseInt(y)===x? true :false */
+};
+isPalindrome(x)
+
