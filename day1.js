@@ -69,11 +69,11 @@ For example, 121 is a palindrome while 123 is not.
 let x=12321
 var isPalindrome = function(x) {
   /*  let y=  x.toString().split('').reverse().join('')* Math.sign(x)
-    y === x ? console.log("true") : console.log("false") */
-    
-
-    /* let y = x.toString()
-    for (let i=0;i < y.length/2;i++ ){
+  y === x ? console.log("true") : console.log("false") */
+  
+  
+  /* let y = x.toString()
+  for (let i=0;i < y.length/2;i++ ){
         let temp =y.charAt(i)
         y.charAt(i)=y.charAt(length-i-1)
         y.charAt(length-i-1) = temp
@@ -81,4 +81,23 @@ var isPalindrome = function(x) {
     parseInt(y)===x? true :false */
 };
 isPalindrome(x)
+
+//----------------------------------------------------
+
+
+//Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+
+let num = [3,0,1]
+
+ var missingNumber = function(num) {
+    let missing;
+    for(let i=0;i<=num.length;i++){
+        if(num.indexOf(i)===-1){
+         return missing =i 
+        }
+        
+    }
+};
+console.log(missingNumber(num))
+
 
