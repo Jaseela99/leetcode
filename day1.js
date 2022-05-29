@@ -92,7 +92,9 @@ let num = [3,0,1]
  var missingNumber = function(num) {
     let missing;
     for(let i=0;i<=num.length;i++){
+        //if indexof num[i] is -1 then then that index does nt exist in array so does the value 
         if(num.indexOf(i)===-1){
+            //missing value is returned
          return missing =i 
         }
         
