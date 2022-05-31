@@ -1,26 +1,5 @@
-/* Given a string array words, return the maximum value of length(word[i]) * length(word[j]) 
-where the two words do not share common letters.
- If no such two words exist, return 0. */
 
-
- /* let  words = ["abcw","baz","foo","bar","xtfn","abcdef"]
-
- var maxProduct = function(words){
-      for (let i=0;i<words.length;i++){
-         for (let j=i+1;j<words.length;j++){
-            if(words[i].substring(0,words[i].length)!==words[j].substring(0,words[j].length)){
-            return   words[i].length * words[j].length 
-            }else{
-                return 0
-            }
-         }
-     }   
-    
- }
- console.log(maxProduct(words)) */
-
- //**************************************************************** 
- 
+ //calender question
 
 /*  Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
 The integer division should truncate toward zero, which means losing its fractional part. For example, 8.345 would be truncated to 8, and -2.7335 would be truncated to -2.
@@ -66,7 +45,7 @@ console.log(divide(dividend,divisor))
 /////////////////////////////////////////////////////////////////////////////////////
 
 //discussed question
-/* 
+
  let nums=[0,1,2,2,4,3,2,0,5]
 let val=2
 const removeVal =(nums,val)=>{
@@ -84,7 +63,7 @@ const removeVal =(nums,val)=>{
     }
     return {nums,count:existingCount}
 }
-console.log(removeVal(nums,val)) */
+console.log(removeVal(nums,val))
  
 
 
