@@ -30,20 +30,29 @@ let dividend =2147483648
 let divisor =-1
 
 var divide = function(dividend, divisor) {
+
   let  quotient = 0
+  //cases of range
   if (divisor === -1 && dividend === -2147483648) return 2147483647;
   if (divisor === 1 && dividend === 2147483648) return 2147483648;
+  //to get absolute value
   divid = Math.abs(dividend)
   divis =Math.abs(divisor)
+  //if divident =0 or dividend small then it returs zero
   if (dividend === 0 || divid < divis) return 0;
+  //if divsor=1 then dividend is positive otherwise negative
   if (divis === 1) return divisor > 0 ? dividend : -dividend;
+  //while loop runs until divid become less than zero
     while(divid >= divis){
+        //for every time the divisor will be reduced from divident qoutiet increases
         divid -= divis
         quotient++
     }
+    //if both of them are positive or negative then quotient will be returned 
     if((dividend<0 && divisor<0 )|| (dividend>0 && divisor>0)){
         return quotient 
     }else{
+        //otherwise -quotient
         return quotient = -quotient
     }
     
@@ -51,16 +60,6 @@ var divide = function(dividend, divisor) {
 };
 
 console.log(divide(dividend,divisor)) 
-
-
-
-
-
-
-
-
-
-
 
 
 

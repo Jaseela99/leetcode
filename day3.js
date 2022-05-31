@@ -18,7 +18,7 @@ C can be placed before D (500) and M (1000) to make 400 and 900.
 Given a roman numeral, convert it to an integer.*/
 
 
-let s ="III"
+let roman ="III"
 
 
 
@@ -27,3 +27,29 @@ let s ="III"
 
 
  //**************************************************************** 
+
+ //Given a binary string s and an integer k, return true if every binary code of length k is a substring of s. Otherwise, return false.
+/* 
+Input: s = "00110110", k = 2
+Output: true
+Explanation: The binary codes of length 2 are "00", "01", "10" and "11". They can be all found as substrings at indices 0, 1, 3 and 2 respectively.
+ */
+let s = "00110"
+let k = 2
+var hasAllCodes = function(s, k) {
+    //if k is grater than string then false is returned
+    if(s.length<k){
+        return false
+    }
+    //set is defined to store unique values
+    let subStr = new Set()
+    //looping over the string and we need to get k length substrings ,so looping from k to s.length else it will start to store undefinedvalues
+    for (let i=k;i<=s.length;i++){
+        //to the set we add substring(i,i-k) if i ,k then it will store more than k length substrings
+        subStr.add(s.substring(i,i-k))
+        console.log(subStr,i,i-k)
+    }
+    //if size of set and 2 power k equals it returns true
+    return (subStr.size === (2**k)) // 2**2 => 00 01 10 11    
+};
+console.log(hasAllCodes(s,k))
