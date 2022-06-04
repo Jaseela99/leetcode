@@ -347,7 +347,7 @@ The transpose of a matrix is the matrix flipped over its main diagonal, switchin
 Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
 Output: [[1,4,7],[2,5,8],[3,6,9]]*/
 
-let matrix = [[1,2,3],
+/* let matrix = [[1,2,3],
 [4,5,6]]
 
 var transpose = function(matrix) {
@@ -355,29 +355,149 @@ var transpose = function(matrix) {
     var trans = matrix[0].map((row,r)=>{return matrix.map((col,c)=> {return matrix[c][r]})})
     return trans */
 
-    //******************************8 */
+    //******************************
 
-    let trans =[]
-    //matrix[0].length represents length of nested array
-    for(let i=0;i<matrix[0].length;i++){ //i loops up to 3
-        //for every i a newcol is created
-        let newCol=[]
-        //j=0,1
-        for(let j=0;j<matrix.length;j++){
-          newCol.push(matrix[j][i]) //00 10 is stored in column => 1,4
+//     let trans =[]
+//     //matrix[0].length represents length of nested array
+//     for(let i=0;i<matrix[0].length;i++){ //i loops up to 3
+//         //for every i a newcol is created
+//         let newCol=[]
+//         //j=0,1
+//         for(let j=0;j<matrix.length;j++){
+//           newCol.push(matrix[j][i]) //00 10 is stored in column => 1,4
         
-        } //it is pushed to trans
-        trans.push(newCol)
-    }//after looping every i tras is returned
-    return trans
+//         } //it is pushed to trans
+//         trans.push(newCol)
+//     }//after looping every i tras is returned
+//     return trans
+// };
+// console.log(transpose (matrix))
+ 
+
+/////////////////////////////////////////////////////////////////////////
+
+
+/////////////////day6
+
+/* Given a 2D matrix matrix, handle multiple queries of the following type:
+Calculate the sum of the elements of matrix inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).
+ */
+
+/* let matrix=[ [ 2, 0, 1], [ 1, 0, 1], [ 0, 3, 0]]
+
+var NumMatrix = function(matrix) {
+    let matric =[...matrix]
+    let sum=0
+    let runSum = matric.map((num=>num+=sum))
+    return runSum
 };
-console.log(transpose (matrix))
+console.log(NumMatrix(matrix))
+ */
+
+/* 
+Implement the NumMatrix class:
+
+NumMatrix(int[][] matrix) Initializes the object with the integer matrix matrix.
+int sumRegion(int row1, int col1, int row2, int col2) Returns the sum of the elements of matrix inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).
+
+Input
+["NumMatrix", "sumRegion", "sumRegion", "sumRegion"]
+[[[[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]]], [2, 1, 4, 3], [1, 1, 2, 2], [1, 2, 2, 4]]
+Output
+[null, 8, 11, 12]
+
+Explanation
+NumMatrix numMatrix = new NumMatrix([[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]]);
+numMatrix.sumRegion(2, 1, 4, 3); // return 8 (i.e sum of the red rectangle)
+numMatrix.sumRegion(1, 1, 2, 2); // return 11 (i.e sum of the green rectangle)
+numMatrix.sumRegion(1, 2, 2, 4); // return 12 (i.e sum of the blue rectangle)
+ */
+
+
+/* var NumMatrix = function(matrix) {
+    const m = matrix.length;
+   const n = matrix[0].length;
+   
+   const sum = [...Array(m)].map(_ => [...Array(n)].fill(0));
+   
+   for(let i = 0; i < m; i++) {
+       
+       for(let j = 0; j < n; j++) {
+           sum[i][j] = (sum[i - 1]?.[j] || 0) + (sum[i]?.[j - 1] || 0) + matrix[i][j] - (sum[i - 1]?.[j - 1] || 0);
+       }
+   }
+   
+   this.sum = sum;
+};
+
+
+NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
+  return this.sum[row2][col2] - (this.sum[row1 - 1]?.[col2] || 0) - (this.sum[row2]?.[col1 -1] || 0) +
+       (this.sum[row1 - 1]?.[col1 -1] || 0); 
+}; */
+
+/** 
+* Your NumMatrix object will be instantiated and called as such:
+* var obj = new NumMatrix(matrix)
+* var param_1 = obj.sumRegion(row1,col1,row2,col2)
+*/
 
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
 
 
+/////////////////////day7
+
+/* The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
+Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
+Input: n = 4
+Output: [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above*/
+
+let n=4;
 
 
+var solveNQueens = function(n) {
+    //create 2d Array
+  let board=  Array(n).fill(0).map(()=>Array(n).fill("."))
+  for(let i=0;i<board[0].length;i++){
+      for(let j=0;j<board.length;j++){
+          if(board[i][j]==="."){
+              board[i][j]="Q"
+              i++
+          }
+          
+      }
+  }
+  return board
+};
+console.log(solveNQueens(n))
+
+/* var solveNQueens = function(N) {
+    let ans = [],
+        board = Array.from({length: N}, () => new Array(N).fill('.'))
+
+    const place = (i, vert, ldiag, rdiag) => {
+        if (i === N) {
+            let res = new Array(N)
+            for (let row = 0; row < N; row++)
+                res[row] = board[row].join("")
+            ans.push(res)
+            return
+        }
+        for (let j = 0; j < N; j++) {
+            let vmask = 1 << j, lmask = 1 << (i+j), rmask = 1 << (N-i-1+j)
+            if (vert & vmask || ldiag & lmask || rdiag & rmask) continue
+            board[i][j] = 'Q'
+            place(i+1, vert | vmask, ldiag | lmask, rdiag | rmask)
+            board[i][j] = '.'
+        }
+    }
+
+    place(0,0,0,0)
+    return ans
+} */
 
