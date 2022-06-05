@@ -5,7 +5,6 @@ Given an integer n, return the number of distinct solutions to the n-queens puzz
 Input: n = 4
 Output: 2*/
 
-
 /* var totalNQueens = function(n) {
     if (n === 1 || n >= 4) return dfs([], n, 0);
  return 0;
@@ -37,4 +36,60 @@ var isValid = function (oldPoints, newPoint) {
 
 //*************************************************************************************************************************************** */
 
+/* Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+An input string is valid if:
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Input: s = "()"
+Output: true */
 
+let s = "(]";
+var isValid = function (s) {
+  /*  //bracketsets
+  const bracketSets = {
+    "}": "{",
+    "]": "[",
+    ")": "(",
+  };
+  //to store brackets if itsnot in correct order
+  const arr = [];
+  //if the first character in string is closing tag it returns false
+  if (s[0] === "}" || s[0] === "]" || s[0] === ")") return false;
+  //looping over the string
+  for (let i = 0; i < s.length; i++) {
+      //if any of them contains opening brackets it is pushed inside array
+    if (s[i] === "{" || s[i] === "[" || s[i] === "(") arr.push(s[i]);
+    else {
+        //if the last elemnt in the array and the value of the s[i] in bracket sets are equal and they are popped out
+      if (arr[arr.length - 1] === bracketSets[s[i]]) {
+          console.log(bracketSets[s[i]])
+        arr.pop();
+      } else arr.push(s[i]);
+    }
+  }
+  return !arr.length
+   */
+
+  //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  const stack = [];
+  const map = {
+    "(": ")",
+    "[": "]",
+    "{": "}",
+  };
+  //looping
+  for (let i = 0; i < s.length; i++) {
+    //if there is value for s[i] in map it is pushed in to stack
+    if (map[s[i]]) {
+      console.log(s[i], map[s[i]]);
+      stack.push(map[s[i]]);
+      //if s[i] is not poppedout then false is returned
+    } else if (s[i] !== stack.pop()) {
+      return false;
+    }
+  }
+
+  return !stack.length;
+};
+
+console.log(isValid(s));
