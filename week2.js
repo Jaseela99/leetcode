@@ -93,3 +93,54 @@ var isValid = function (s) {
 };
 
 console.log(isValid(s));
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////day2
+
+// Given the heads of two singly linked-lists headA and headB, 
+// return the node at which the two lists intersect.
+//  If the two linked lists have no intersection at all, return null.
+/* Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
+Output: Intersected at '8'
+Explanation: The intersected node's value is 8 (note that this must not be 0 if the two lists intersect).
+From the head of A, it reads as [4,1,8,4,5]. From the head of B, it reads as [5,6,1,8,4,5]. There are 2 nodes before the intersected node in A; There are 3 nodes before the intersected node in B.
+ */
+
+/* let headA = [4,1,4,8,4,5]
+let headB = [5,6,1,8,4,5]
+
+headA=  4-1-4--->
+                8-4-5
+headB=  5-6-1--->  */               
+
+var getIntersectionNode = function(headA, headB) {
+  //head is the first node of a linked list if its reference is to null then it returns null since there is no intersection
+    if(headA===null||headB===null) return null
+    //declaring variables
+    let pointer1 = headA
+    let pointer2 = headB
+    //until the pointers are equal we cant find the intersection
+    while (pointer1 !== pointer2){
+      //pointer is passed to the next node of linked list
+      pointer1=pointer1.next
+      pointer2=pointer2.next
+      //after looping through the end of the linked list it points to null then the node will be given to the headB
+      if(pointer1===null){
+        pointer1=headB
+      }
+      //similarily for pointer2
+      if(pointer2 ===null){
+        pointer2=headA
+      }
+      //when 1==2 then any of that is returned
+      //if there is no intersection at the end both the head points to null hence it returns null
+      if(pointer1===pointer2)
+      return pointer1
+    }
+    return pointer1
+};
+console.log(getIntersectionNode(headA,headB))
+
