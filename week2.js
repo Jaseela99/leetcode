@@ -144,3 +144,40 @@ var getIntersectionNode = function(headA, headB) {
 };
 console.log(getIntersectionNode(headA,headB))
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////day3
+
+/* You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n 
+Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+Output: [1,2,2,3,5,6]
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.*/
+let nums1 = [1,2,3,0,0,0]
+let  m = 3 
+let nums2 = [2,5,6]
+let n = 3
+var merge = function(nums1, m, nums2, n) {
+  //we need to start from last index
+  let first = m-1;
+  let second = n-1;
+  //looping from last index to first
+  for (i = m+n-1;i >= 0;i--){
+    //if the loop is over and then break is given
+      if(second < 0){
+          break
+        }
+        //nums1 has some empty elements and it is replaced by first array elements if element in array 1 > array2
+      if(nums1[first]>nums2[second]){
+        nums1[i]=nums1[first]
+        first--;
+      }else{
+        //else second array element is given to empty elements
+          nums1[i] = nums2[second]
+          second--;
+      }
+  }   
+};
+console.log(merge(nums1,m,nums2,n))
