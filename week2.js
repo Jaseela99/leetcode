@@ -196,7 +196,7 @@ Output: 1
 Explanation: s is already a palindrome, so its entirety can be removed in a single step. */
 
 
- let s = "ababa"
+/*  let s = "ababa"
 var removePalindromeSub = function(s) {
   //s is empty return 0
   if (s.length===0)
@@ -224,6 +224,7 @@ Input: numbers = [2,7,11,15], target = 9
 Output: [1,2]
 Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
  */
+/*
 let numbers = [2,7,11,15]
 let target=9
 var twoSum = function (numbers,target){
@@ -246,4 +247,47 @@ var twoSum = function (numbers,target){
 }
 console.log(twoSum(numbers,target))
 
+ */
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////day6
 
+/* Given a string s, find the length of the longest substring without repeating characters.
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3. */
+
+let s = "abcabcbb"
+
+var  lengthOfLongestSubstring = function(s){
+  //to store the unique values
+  let set = new Set()
+  //two pointers
+  let left=0;
+  let right=0
+  //max length of the unique substring
+  let maxSubStrLength =0
+
+  while(right<s.length){
+    //if the set donot have right th character of string,then it is added to set 
+    if (!set.has(s.charAt(right))){
+      set.add(s.charAt(right))
+      //previous sub length and setsize is compared and max is given to maxlength of substring
+      maxSubStrLength = Math.max(maxSubStrLength,set.size)
+      //right pointer is moved by 1
+      right++
+    }else{
+      //if set has the charAt,left most charat from s is removed from the set and left pointer is moved by 1
+      set.delete(s.charAt(left))
+      left++ 
+    }
+
+  }
+  //if right=> s.length then length is returned
+  return maxSubStrLength
+}
+
+console.log(lengthOfLongestSubstring(s))
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////day7
