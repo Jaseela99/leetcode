@@ -305,21 +305,23 @@ let x=5
 var minOperations = function(nums, x) {
   let target = -x, res = -1, sum = 0, left = 0;
   nums.forEach(element => {
-      target += element;
-  }); 
-  if(target === 0) return nums.length;
-  if(target < 0) return -1;
+      target += element; //6
+  });
+  if(target === 0) return nums.length; //if (sum of elements)- x =0 ;then nums.length is the number of steps to reduce the x to 0
+  if(target < 0) return -1; //if -ve then it cannot be reduced hence return -1
+  //if target is positive
   nums.forEach(function(element, index){
-      sum += element;
-      while(sum > target){
+      sum += element;        //each  of elemnt is added to sum
+      
+      while(sum > target){  //nums[left++] is removed from sum
           sum -= nums[left++];
       }
-      if(sum === target){
+      if(sum === target){ //res will be maximum of res and length- left
           res = Math.max(res, index - left + 1);
       }
   })
-  if(res === -1) return -1;
-  else return nums.length - res; 
+  if(res === -1) return -1; 
+  else return nums.length - res; //if res!=-1 then it willbe length-res
 
 }
 
