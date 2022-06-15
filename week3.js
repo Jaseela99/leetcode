@@ -132,3 +132,39 @@ const dp = Array(word1.length + 1);
    }
    return dp[word1.length]; */
   }
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+  /////////day4
+  /* you are given an array of words where each word consists of lowercase English letters.
+wordA is a predecessor of wordB if and only if we can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB.
+For example, "abc" is a predecessor of "abac"===================>  abc are in same order in abac and onlly one a is added to it
+while "cba" is not a predecessor of "bcad".
+A word chain is a sequence of words [word1, word2, ..., wordk] with k >= 1, where word1 is a predecessor of word2, word2 is a predecessor of word3, and so on. A single word is trivially a word chain with k == 1.
+Return the length of the longest possible word chain with words chosen from the given list of words.
+Input: words = ["a","b","ba","bca","bda","bdca"]
+Output: 4
+Explanation: One of the longest word chains is ["a","ba","bda","bdca"]. */
+
+let words = ["b","a","ba","bca","bda","bdca"]
+var longestStrChain = function(words) { 
+    let dp = {};
+    //sorting the array on the basis of length
+    words = words.sort((a,b)=>a.length - b.length);
+    //console.log(words)
+    //for every word
+    for (let word of words) {
+        let longest = 0;
+        //looping through the word
+        for (let i=0;i<word.length;i++) {
+            //predecesor = 
+            let pre = word.slice(0,i) + word.slice(i+1);
+            console.log(pre,word.slice(0,i),word.slice(i+1))
+            longest = Math.max(longest, (dp[pre]||0) + 1);
+        }
+        dp[word] = longest;
+    }
+    return Math.max(...Object.values(dp));
+   
+};
+console.log(longestStrChain(words))
