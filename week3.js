@@ -149,6 +149,7 @@ Explanation: One of the longest word chains is ["a","ba","bda","bdca"]. */
 let words = ["b","a","ba","bca","bda","bdca"]
 var longestStrChain = function(words) { 
     let dp = {};
+    let max=0
     //sorting the array on the basis of length
     words = words.sort((a,b)=>a.length - b.length);
     //console.log(words)
@@ -157,14 +158,52 @@ var longestStrChain = function(words) {
         let longest = 0;
         //looping through the word
         for (let i=0;i<word.length;i++) {
-            //predecesor = 
+            //predecesor  
             let pre = word.slice(0,i) + word.slice(i+1);
-            console.log(pre,word.slice(0,i),word.slice(i+1))
+            //indexof predecessor in word
             longest = Math.max(longest, (dp[pre]||0) + 1);
         }
         dp[word] = longest;
+        max=Math.max(max,longest) //max value is obtained
     }
-    return Math.max(...Object.values(dp));
+    return max;
    
 };
 console.log(longestStrChain(words))
+
+///////////////////////////////////////////////////////////
+
+///////day4
+
+/* Given a string s, return the longest palindromic substring in s.
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer. */
+
+let s ="babad"
+
+var longestPaliandrome= function (s){
+    let max =""
+    //loops through the s
+    for (var i = 0; i < s.length; i++) {
+        //to loop through two adjacent indices i and i + 1
+        for (var j = 0; j < 2; j++) {
+        //2 pointers
+          var left = i; //0
+          var right = i + j;//5
+          //both are equal then inner indices are checked
+          while (s[left] && s[left] === s[right]) {
+            left--;
+            right++;
+          }
+          //taking the palindromic only
+          if ((right - left - 1) > max.length) {
+            //substring is stored  in max
+            max = s.substring(left + 1, right);
+          }
+            
+        }
+      }
+      return max;  
+}
+console.log(longestPaliandrome(s))
