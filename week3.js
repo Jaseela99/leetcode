@@ -223,13 +223,17 @@ let root = [0,0,null,0,0]
 var minCameraCover = function(root) {
     let ans = 0
      const dfs = node => {
+        //if nonode return 0
          if (!node) return 0
+         //left+right = val
          let val = dfs(node.left) + dfs(node.right)
          if (val === 0) return 3
+         //if node left+right <3 ans is incremented
          if (val < 3) return 0
          ans++
          return 1
      }
+     //if last return <2 ans is returned
      return dfs(root) > 2 ? ans + 1 : ans  
  };
-
+console.log(minCameraCover(root))
