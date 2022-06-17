@@ -207,3 +207,29 @@ var longestPaliandrome= function (s){
       return max;  
 }
 console.log(longestPaliandrome(s))
+
+
+//////////////////////////////////////////////////////////
+////////////day5
+/* You are given the root of a binary tree. 
+We install cameras on the tree nodes where each camera at a node can monitor its parent, itself, and its immediate children.
+Return the minimum number of cameras needed to monitor all nodes of the tree. 
+Input: root = [0,0,null,0,0]
+Output: 1
+Explanation: One camera is enough to monitor all nodes if placed as shown.*/
+
+let root = [0,0,null,0,0]
+
+var minCameraCover = function(root) {
+    let ans = 0
+     const dfs = node => {
+         if (!node) return 0
+         let val = dfs(node.left) + dfs(node.right)
+         if (val === 0) return 3
+         if (val < 3) return 0
+         ans++
+         return 1
+     }
+     return dfs(root) > 2 ? ans + 1 : ans  
+ };
+
