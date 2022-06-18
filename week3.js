@@ -237,3 +237,44 @@ var minCameraCover = function(root) {
      return dfs(root) > 2 ? ans + 1 : ans  
  };
 console.log(minCameraCover(root))
+//////////////////////////////////////////////////////////////////////////
+//////day6
+
+/* Design a special dictionary with some words that searchs the words in it by a prefix and a suffix.
+Implement the WordFilter class:
+WordFilter(string[] words) Initializes the object with the words in the dictionary.
+f(string prefix, string suffix) Returns the index of the word in the dictionary, which has the prefix prefix and the suffix suffix. If there is more than one valid index, return the largest of them. If there is no such word in the dictionary, return -1.
+Input
+["WordFilter", "f"]
+[[["apple"]], ["a", "e"]]
+Output
+[null, 0]
+// return 0, because the word at index 0 has prefix = "a" and suffix = 'e".
+Explanation
+WordFilter wordFilter = new WordFilter(["apple"]);
+wordFilter.f("a", "e");  */
+
+let wors=["WordFilter", "f"]
+[[["apple"]], ["a", "e"]]
+var WordFilter = function(words) {
+    this.map = new Map();
+  for (let i = 0; i < words.length; i++) {
+    let prefix = '';
+    for (let j = 0; j <= words[i].length; j++) {
+      let suffix = '';
+      for (let k = 0; k <= words[i].length; k++) {
+        suffix = words[i].slice(k);
+        this.map.set(prefix + '#' + suffix, i);
+      }
+      prefix += words[i][j];
+    }
+  }
+};
+
+
+WordFilter.prototype.f = function(prefix, suffix) {
+  let target = prefix + '#' + suffix;
+  return this.map.has(target) ? this.map.get(target) : -1;  
+};
+
+console.log(WordFilter(words))
