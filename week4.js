@@ -52,3 +52,20 @@ for (let i = 0; i < len; i++) {
 }
 return len
 };
+/////////////////////////////////////////////////////////
+////////day3
+
+/* Given an integer array nums and an integer k, return the kth largest element in the array.
+Note that it is the kth largest element in the sorted order, not the kth distinct element.
+Input: nums = [3,2,1,5,6,4], k = 2
+Output: 5 */
+let nums = [3,2,1,5,6,4]
+let k = 2
+
+var findKthLargest = function(nums, k) {
+    //sorting the array
+    nums.sort((a,b)=>{return a-b})
+    //finding kth largest element
+    return nums[nums.length-k]
+  };
+  console.log(findKthLargest(nums,k))
