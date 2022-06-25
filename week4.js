@@ -59,7 +59,7 @@ return len
 Note that it is the kth largest element in the sorted order, not the kth distinct element.
 Input: nums = [3,2,1,5,6,4], k = 2
 Output: 5 */
-let nums = [3,2,1,5,6,4]
+/* let nums = [3,2,1,5,6,4]
 let k = 2
 
 var findKthLargest = function(nums, k) {
@@ -68,7 +68,7 @@ var findKthLargest = function(nums, k) {
     //finding kth largest element
     return nums[nums.length-k]
   };
-  console.log(findKthLargest(nums,k))
+  console.log(findKthLargest(nums,k)) */
   ///////////////////////////////////////////////
   /////////day4
   /* There are n different online courses numbered from 1 to n.
@@ -109,3 +109,18 @@ var isPossible = function(target) {
     }
     return true  
 };
+//////////////////////////////////////
+/////////day6
+/* Given an array nums with n integers, your task is to check if it could become non-decreasing by modifying at most one element.
+We define an array is non-decreasing if nums[i] <= nums[i + 1] holds for every i (0-based) such that (0 <= i <= n - 2).
+Input: nums = [4,2,3]
+Output: true
+Explanation: You could modify the first 4 to 1 to get a non-decreasing array. */
+let nums =[4,2,3]
+var checkPossibility = function(nums) {
+    for (let i = 1, err = 0; i < nums.length; i++)
+          if (nums[i] < nums[i-1])
+              if (err++ || (i > 1 && i < nums.length - 1 && nums[i-2] > nums[i] && nums[i+1] < nums[i-1]))
+                  return false 
+      return true   
+  };
