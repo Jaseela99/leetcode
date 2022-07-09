@@ -174,14 +174,7 @@ Explanation: Paint houses of this way [1,2,2,1,1]
 This array contains target = 3 neighborhoods, [{1}, {2,2}, {1,1}].
 Cost of paint all houses (1 + 1 + 1 + 1 + 5) = 9. */
 
-/**
- * @param {number[]} houses
- * @param {number[][]} cost
- * @param {number} m
- * @param {number} n
- * @param {number} target
- * @return {number}
- */
+
  var minCost = function(houses, cost, m, n, target) {
     const cache = {};
     const backtrack = (prevColor, house, numNeighborhoods) => {
@@ -228,4 +221,26 @@ Cost of paint all houses (1 + 1 + 1 + 1 + 5) = 9. */
     // if the result is max value, return -1;
     const result = backtrack(-1, 0, 0);
     return result === Infinity ? -1 : result;
+};
+
+/////////////////////////////////////////
+/////day6
+
+/* You are given a 0-indexed integer array nums and an integer k.
+You are initially standing at index 0. In one move, you can jump at most k steps forward without going outside the boundaries of the array. That is, you can jump from index i to any index in the range [i + 1, min(n - 1, i + k)] inclusive.
+You want to reach the last index of the array (index n - 1). Your score is the sum of all nums[j] for each index j you visited in the array.
+Return the maximum score you can get.
+Input: nums = [1,-1,-2,4,-7,3], k = 2
+Output: 7
+Explanation: You can choose your jumps forming the subsequence [1,-1,4,3] (underlined above). The sum is 7. */
+
+var maxResult = function(nums, k) {
+    let n = nums.length, deq = [n-1]
+    for (let i = n - 2; ~i; i--) {
+        if (deq[0] - i > k) deq.shift()
+        nums[i] += nums[deq[0]]
+        while (deq.length && nums[deq[deq.length-1]] <= nums[i]) deq.pop()
+        deq.push(i)
+    }
+    return nums[0] 
 };
