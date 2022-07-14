@@ -68,3 +68,25 @@ var levelOrder = function(root) {
    }
    return ans
 };
+///////////////////
+/* Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
+Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+Output: [3,9,20,null,null,15,7] */
+
+var buildTree = function(preorder, inorder) {
+    let M = new Map()
+    for (let i = 0; i < inorder.length; i++)
+        M.set(inorder[i], i)
+    return splitTree(preorder, M, 0, 0, inorder.length-1)
+};
+
+var splitTree = function(preorder, M, pix, ileft, iright) {
+    let rval = preorder[pix],
+        root = new TreeNode(rval),
+        imid = M.get(rval)
+    if (imid > ileft)
+        root.left = splitTree(preorder, M, pix+1, ileft, imid-1)
+    if (imid < iright)
+        root.right = splitTree(preorder, M, pix+imid-ileft+1, imid+1, iright)
+    return root 
+};
