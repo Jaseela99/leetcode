@@ -162,4 +162,26 @@ var kInversePairs = function(n, k) {
           }
           return dp[n][k];   
   };
- 
+  ///////////////////////////////
+
+ /*  Given a matrix and a target, return the number of non-empty submatrices that sum to target.
+A submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with x1 <= x <= x2 and y1 <= y <= y2.
+Two submatrices (x1, y1, x2, y2) and (x1', y1', x2', y2') are different if they have some coordinate that is different: for example, if x1 != x1'.
+  */
+var numSubmatrixSumTarget = function(M, T) {
+    let xlen = M[0].length, ylen = M.length,
+       ans = 0, res = new Map(), csum
+   for (let i = 0, r = M[0]; i < ylen; r = M[++i]) 
+       for (let j = 1; j < xlen; j++)
+           r[j] += r[j-1]
+   for (let j = 0; j < xlen; j++)
+       for (let k = j; k < xlen; k++) {
+           res.clear(), res.set(0,1), csum = 0
+           for (let i = 0; i < ylen; i++) {
+               csum += M[i][k] - (j ? M[i][j-1] : 0)
+               ans += (res.get(csum - T) || 0)
+               res.set(csum, (res.get(csum) || 0) + 1)
+           }
+       }
+   return ans
+};
