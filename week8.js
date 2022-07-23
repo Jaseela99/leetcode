@@ -97,3 +97,45 @@ var partition = function(head, x) {
     front.next = bdum.next, back.next = null
     return fdum.next   
 };
+//////////////////////////////////////////////////////////
+/* You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+Input: nums = [5,2,6,1]
+Output: [2,1,1,0]
+Explanation:
+To the right of 5 there are 2 smaller elements (2 and 1).
+To the right of 2 there is only 1 smaller element (1).
+To the right of 6 there is 1 smaller element (1).
+To the right of 1 there is 0 smaller element.
+ */
+class BinaryIndexedTree {
+  constructor(size) {
+      this.bit = new Array(size);
+  }
+  sum(index) {
+      let count = 0;
+      while (index > 0) {
+          count += this.bit[index] || 0;
+          index = index - (index & -index); // this is to get parent node in binary indexed tree
+      } 
+      return count;
+  }
+  update(index, delta) {
+      while (index < this.bit.length) {
+          this.bit[index] = (this.bit[index] || 0) + delta;
+          index = index + (index & -index); // this is to get next node in binary indexed tree
+      }
+  }
+}
+
+
+
+var countSmaller = function(nums) {
+  let counts = new Array(nums.length);
+  let delta = 1e4+1; // Math.pow(10,4) +1 this is to handle negative numbers to make them positive as binary indexed tree takes indexes which is >= 0
+  let bitArray = new BinaryIndexedTree(2e4+2);
+  for (let i = nums.length - 1; i >= 0; i--) {
+      counts[i] = bitArray.sum(nums[i] + delta - 1);
+      bitArray.update(nums[i]+delta, 1);
+  }
+  return counts;
+};
