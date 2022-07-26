@@ -196,3 +196,13 @@ var searchRange = function(N, T) {
   if (N[Tleft] !== T) return [-1,-1]
   return [Tleft, find(T+1, N, Tleft) - 1] 
 };
+////////////////////////////////////////////
+/* Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q 
+as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” */
+var lowestCommonAncestor = function(root, p, q) {
+  if (!root || root === p || root === q) return root;
+var resL = lowestCommonAncestor(root.left, p, q);
+var resR = lowestCommonAncestor(root.right, p, q);
+return (resL && resR) ? root : (resL || resR);
+};
