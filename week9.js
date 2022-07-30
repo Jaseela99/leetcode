@@ -55,3 +55,37 @@ var findAndReplacePattern = function(words, pattern) {
   words.forEach(compare)
   return ans
 };
+
+
+///////////////////////////////////////////////////////////
+/* You are given two string arrays words1 and words2.
+A string b is a subset of string a if every letter in b occurs in a including multiplicity.
+For example, "wrr" is a subset of "warrior" but is not a subset of "world".
+A string a from words1 is universal if for every string b in words2, b is a subset of a.
+Return an array of all the universal strings in words1. You may return the answer in any order.
+Input: words1 = ["amazon","apple","facebook","google","leetcode"], words2 = ["e","o"]
+Output: ["facebook","google","leetcode"] */
+var wordSubsets = function(A, B) {
+    let Bfreq = new Int8Array(26), cmax = 0,
+       check = new Int8Array(26), ans = []
+   for (let i = 0; i < B.length; i++, check.fill()) {
+       let word = B[i]
+       for (let j = 0; j < word.length; j++)
+           check[word.charCodeAt(j) - 97]++
+       for (let j = 0; j < 26; j++) {
+           let diff = check[j] - Bfreq[j]
+           if (diff > 0) cmax += diff, Bfreq[j] += diff
+           if (cmax > 10) return []
+       }
+   }
+   for (let i = 0; i < A.length; i++, check.fill()) {
+       let word = A[i], j
+       if (word.length < cmax) continue
+       for (j = 0; j < word.length; j++)
+           check[word.charCodeAt(j) - 97]++
+       for (j = 0; j < 26; j++)
+           if (check[j] < Bfreq[j]) break
+       if (j === 26) ans.push(word)
+   }
+   return ans
+};
