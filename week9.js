@@ -316,5 +316,36 @@ var mirrorReflection = function(p, q) {
 	
 	return 1
 };
+
+/////////////////////////////////////////////////
+/* Given an array of distinct integers nums and a target integer target, return the number of possible combinations that add up to target.
+
+The test cases are generated so that the answer can fit in a 32-bit integer.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3], target = 4
+Output: 7
+Explanation:
+The possible combination ways are:
+(1, 1, 1, 1)
+(1, 1, 2)
+(1, 2, 1)
+(1, 3)
+(2, 1, 1)
+(2, 2)
+(3, 1)
+Note that different sequences are counted as different combinations. */
+
+var combinationSum4 = function(N, T) {
+    let dp = new Uint32Array(T+1)
+    dp[0] = 1
+    for (let i = 1; i <= T; i++)
+        for (let num of N)
+            if (num <= i) dp[i] += dp[i-num]
+    return dp[T]
+};
   
   
